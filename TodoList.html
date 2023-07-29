@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Grocery List</title>
+  <style>
+    /*html {
+      background-color: pink;
+    }*/
+    html {
+  background-color: #2F4F4F
+}
+
+/* Example gradient background */
+body {
+  background-image: linear-gradient(to bottom, #2F4F4F, white);
+}
+    html, body {
+      text-align: center;
+    }
+    li {
+      text-align: center;
+    }
+    button {
+  background-color: #ff6666;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ff4d4d;
+}
+
+li {
+  text-align: center;
+  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+li:hover {
+  background-color: #f5f5f5;
+}
+
+li {
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.animate-charcter
+{
+   text-transform: uppercase;
+  background-image: linear-gradient(
+    -225deg,
+    #231557 0%,
+    #44107a 29%,
+    #ff1361 67%,
+    #fff800 100%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 100% auto;
+  color: #fff;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 2s linear infinite;
+  display: inline-block;
+  font-size: 80px;
+}
+
+
+}
+
+@keyframes textclip {
+  to {
+    background-position: 150% center;
+  }
+}
+  </style>
+  <hr>
+</head>
+<body>
+  <div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h3 class="animate-charcter">Simple Grocery List</h3>
+    </div>
+  </div>
+</div>
+  
+  <input class="Add" type="text" placeholder="Add to list">
+  <button class="Added">Add</button>
+  <ul id="itemList">
+    <li><button class="Delete">Delete</button></li>
+  </ul>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var addButton = document.querySelector(".Added");
+      var input = document.querySelector(".Add");
+      var ul = document.querySelector("ul");
+
+      function inputLength() {
+        return input.value.trim().length;
+      }
+
+      function createListElement() {
+        var li = document.createElement("li");
+        li.textContent = input.value;
+        li.innerHTML += ' <button class="Delete">Delete</button>';
+        ul.appendChild(li);
+        input.value = "";
+      }
+
+      function addListAfterClick() {
+        if (inputLength() > 0) {
+          createListElement();
+        }
+      }
+
+      function deleteItem(event) {
+        var li = event.target.parentNode;
+        ul.removeChild(li);
+      }
+      function deleteItem(event) {
+        if (confirm("Are you sure you want to delete this item?")) {
+        var li = event.target.parentNode;
+        ul.removeChild(li);
+      }
+      }
+      addButton.addEventListener("click", addListAfterClick);
+
+      ul.addEventListener("click", function(event) {
+        if (event.target.classList.contains("Delete")) {
+          deleteItem(event);
+        }
+      });
+    });
+
+  </script>
+</body>
+</html>
